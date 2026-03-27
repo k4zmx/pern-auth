@@ -12,7 +12,7 @@ const protectRoute = async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         const user = await pool.query(
-            'SELECT id, username, email FROM users WHERE id = $1',
+            'SELECT id, name, email FROM users WHERE id = $1',
             [decoded.id]
         );
 
