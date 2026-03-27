@@ -14,17 +14,35 @@ A full-stack authentication system built with the PERN stack. Handles user regis
 ## Project Structure
 
 ```
-pern-auth/
-├── backend/
-│   ├── controllers/
-│   ├── routes/
-│   ├── services/
+LOGIN/
+├── login-backend/
 │   ├── middleware/
-│   ├── db.js
-│   └── index.js
-├── frontend/
-│   └── src/
-│       └── components/
+│   │   └── protectRoute.js
+│   ├── routes/
+│   │   └── auth.js
+│   ├── src/
+│   │   └── db.js
+│   ├── .env
+│   ├── package.json
+│   └── server.js
+├── login-frontend/
+│   └── auth-project/
+│       ├── public/
+│       ├── src/
+│       │   ├── assets/
+│       │   ├── components/
+│       │   │   └── Navbar.jsx
+│       │   ├── pages/
+│       │   │   ├── Home.jsx
+│       │   │   ├── Login.jsx
+│       │   │   └── Register.jsx
+│       │   ├── store/
+│       │   │   └── authStore.js
+│       │   ├── App.jsx
+│       │   ├── index.css
+│       │   └── main.jsx
+│       ├── index.html
+│       └── vite.config.js
 └── .gitignore
 ```
 
@@ -34,7 +52,8 @@ pern-auth/
 
 - Passwords are hashed with **bcrypt** before being stored in the database
 - On login, a **JWT** is generated and sent to the client
-- Protected routes verify the token via an **auth middleware** before allowing access
+- Protected routes verify the token via **protectRoute.js** middleware before allowing access
+- Global auth state is managed via **authStore.js**
 
 ---
 
@@ -66,11 +85,11 @@ CREATE TABLE users (
 ### 3. Setup The Backend
 
 ```bash
-cd backend
+cd login-backend
 npm install
 ```
 
-Create a `.env` file in `backend/`:
+Create a `.env` file in `login-backend/`:
 
 ```env
 PORT=5000
@@ -91,7 +110,7 @@ npm run dev
 ### 4. Setup The Frontend
 
 ```bash
-cd frontend
+cd login-frontend/auth-project
 npm install
 npm run dev
 ```
@@ -103,4 +122,5 @@ npm run dev
 - User Registration With Hashed Passwords
 - User Login With JWT Token Generation
 - Protected Routes Via Auth Middleware
-- Token Stored On The Client Side
+- Global Auth State Management
+- Navbar With Auth-Aware Navigation
